@@ -2,6 +2,8 @@ package com.github.user.manager.security.repository;
 
 import com.github.user.manager.security.pojo.bo.PasswordBO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +19,6 @@ import java.util.Optional;
  * @date 2020-08-22 17:18
  * @since 1.0
  */
-
 
 public interface IUserRepository extends JpaRepository<SystemUserDO, Long> {
 

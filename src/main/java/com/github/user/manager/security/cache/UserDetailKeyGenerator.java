@@ -1,5 +1,6 @@
 package com.github.user.manager.security.cache;
 
+import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -28,15 +29,14 @@ public class UserDetailKeyGenerator {
         return (target, method, params) -> Arrays.asList(params).toString();
     }
 
-
     /**
      * 创建默认
      *
      * @return KeyGenerator
      */
-    @Bean("UserGenerator")
-    public KeyGenerator userGenerator() {
+    @Bean("RedisGenerator")
+    public KeyGenerator redisGenerator() {
         log.info("创建 DefaultGenerator!");
-        return (target, method, params) -> params;
+        return (target, method, params) -> Joiner.on(":").skipNulls().join(params);
     }
 }
