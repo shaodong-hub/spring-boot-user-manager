@@ -32,22 +32,27 @@ public class SystemContextInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        SystemRoleDO role = roleRepository.save(getRole());
+        saveUser("root", "188123456780", "ROLE_ROOT");
+        saveUser("user", "188123456781", "ROLE_USER");
+    }
+
+    private void saveUser(String username, String mobile, String roleName) {
+        SystemRoleDO role = roleRepository.save(getRole(roleName));
         Map<Long, SystemRoleDO> map = Maps.newHashMap();
         map.put(role.getId(), role);
-        SystemUserDO user = getUser();
+        SystemUserDO user = getUser(username, mobile);
         user.setRoles(map);
         userRepository.save(user);
     }
 
-    private SystemRoleDO getRole() {
-        return SystemRoleDO.builder().roleName("超管").roleCode("ROLE_ROOT").build();
+    private SystemRoleDO getRole(String roleName) {
+        return SystemRoleDO.builder().roleName(roleName).roleCode(roleName).build();
     }
 
-    private SystemUserDO getUser() {
+    private SystemUserDO getUser(String username, String mobile) {
         SystemUserDO user = SystemUserDO.builder()
-                .username("root")
-                .mobile("18812345678")
+                .username(username)
+                .mobile(mobile)
                 .build();
         user.setPassword("123456");
         return user;

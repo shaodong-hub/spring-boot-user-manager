@@ -3,8 +3,7 @@ package com.github.user.manager.security.pojo.orm;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.github.user.manager.security.pojo.BaseEntity;
-import com.github.user.manager.security.pojo.bo.PasswordBO;
-import com.github.user.manager.security.pojo.converter.PasswordSaveConverter;
+import com.github.user.manager.security.pojo.converter.PasswordConverter;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -70,7 +69,7 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
 
     private String uuid;
 
-    @Column(name = "open_id",columnDefinition = "VARCHAR(10000) COMMENT '密码'")
+    @Column(name = "open_id", columnDefinition = "VARCHAR(255) COMMENT '密码'")
     private String openId;
 
     @Column(columnDefinition = "VARCHAR(20) COMMENT '用户名'")
@@ -80,9 +79,9 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     private String mobile;
 
     @JsonIgnore
-    @Column(columnDefinition = "VARCHAR(10000) COMMENT '密码'")
-    @Convert(converter = PasswordSaveConverter.class)
-    private PasswordBO password;
+    @Column(columnDefinition = "VARCHAR(255) COMMENT '密码'")
+    @Convert(converter = PasswordConverter.class)
+    private String password;
 
     @Column(columnDefinition = "VARCHAR(50) COMMENT '邮箱'")
     private String email;
@@ -115,12 +114,6 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
 
     @JsonIgnore
     @Override
-    public String getPassword() {
-        return password.getCurrentPassword();
-    }
-
-    @JsonIgnore
-    @Override
     public Collection<SystemRoleDO> getAuthorities() {
         return roles.values();
     }
@@ -147,17 +140,6 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void setPassword(String password) {
-        if (null == this.password) {
-            this.password = new PasswordBO();
-        }
-        this.password.setPassword(password);
-    }
-
-    public Boolean matchHistory(String password) {
-        return this.password.matchHistory(password);
     }
 
     @DomainEvents

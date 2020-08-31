@@ -1,7 +1,7 @@
 package com.github.user.manager.security.pojo.dto;
 
-import com.github.user.manager.security.constant.UserPassword;
 import com.github.user.manager.security.constant.ChangePassword;
+import com.github.user.manager.security.constant.UserPassword;
 import lombok.Data;
 
 /**

@@ -13,6 +13,6 @@ public interface OrmTableName {
 
     String SYSTEM_ROLE = "system_role";
 
-    String USER_ROLE = "user_role";
+    String USER_ROLE = "system_user_role";
 
 }

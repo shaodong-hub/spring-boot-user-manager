@@ -56,7 +56,8 @@ public class ManagerUserControllerImpl implements IManagerUserController<ISystem
     @DeleteMapping("/user/{id}")
     @Override
     public ResultVO<Void> deleteUserById(@PathVariable("id") SystemUserDO user) {
-        return ResultVO.success(service.deleteUser(user));
+        service.deleteUser(user);
+        return ResultVO.success();
     }
 
 }

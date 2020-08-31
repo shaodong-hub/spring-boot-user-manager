@@ -2,8 +2,6 @@ package com.github.user.manager.security.repository;
 
 import com.github.user.manager.security.pojo.bo.PasswordBO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

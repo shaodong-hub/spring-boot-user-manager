@@ -1,7 +1,7 @@
 package com.github.user.manager.security.constant.validator;
 
 
-import com.github.user.manager.security.constant.Password;
+import com.github.user.manager.security.constant.UserPassword;
 import com.github.user.manager.security.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +15,7 @@ import javax.validation.ConstraintValidatorContext;
  */
 
 @RequiredArgsConstructor
-public class PasswordValidator implements ConstraintValidator<Password, String> {
+public class PasswordValidator implements ConstraintValidator<UserPassword, String> {
 
     private final PasswordEncoder encoder;
 
