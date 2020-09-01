@@ -1,13 +1,10 @@
 package com.github.user.manager.security.core;
 
-import com.google.common.collect.Maps;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDecisionManager;
-import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -19,13 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-
-import javax.annotation.PostConstruct;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 import static com.github.user.manager.security.common.ISecurityConstant.SYSTEM_LOGIN_USERNAME;
 
@@ -78,7 +68,7 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
         http.authorizeRequests()
                 .anyRequest().authenticated()
         ;
-//        http.authorizeRequests().withObjectPostProcessor(new SystemObjectPostProcessor());
+        http.authorizeRequests().withObjectPostProcessor(new SystemObjectPostProcessor());
 
 //        http.antMatcher("").authorizeRequests().antMatchers("").hasRole("");
 
@@ -101,13 +91,13 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
         super.configure(web);
     }
 
-    private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMap = Maps.newHashMap();
-
-    @PostConstruct
-    public void init() {
-        requestMap.put(new AntPathRequestMatcher("/home1", HttpMethod.GET.name()), Collections.singleton((ConfigAttribute) () -> "ROLE_ROOT"));
-        requestMap.put(new AntPathRequestMatcher("/home2", HttpMethod.GET.name()), Collections.singleton((ConfigAttribute) () -> "ROLE_USER"));
-    }
+//    private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMap = Maps.newHashMap();
+//
+//    @PostConstruct
+//    public void init() {
+//        requestMap.put(new AntPathRequestMatcher("/home1", HttpMethod.GET.name()), Collections.singleton((ConfigAttribute) () -> "ROLE_ROOT"));
+//        requestMap.put(new AntPathRequestMatcher("/home2", HttpMethod.GET.name()), Collections.singleton((ConfigAttribute) () -> "ROLE_USER"));
+//    }
 
     @Order
     private class SystemObjectPostProcessor implements ObjectPostProcessor<FilterSecurityInterceptor> {

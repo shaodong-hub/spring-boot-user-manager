@@ -3,7 +3,7 @@ package com.github.user.manager.security.controller.common.impl;
 import com.github.user.manager.security.controller.common.IUserCenterController;
 import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
-import com.github.user.manager.security.pojo.vo.ISystemUserVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import com.github.user.manager.security.service.common.IUserCenterService;
 import lombok.RequiredArgsConstructor;
@@ -25,26 +25,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user/center")
+@PreAuthorize("isFullyAuthenticated()")
 @RequiredArgsConstructor
-public class UserCenterControllerImpl implements IUserCenterController<ISystemUserVO, SystemUserDTO<Void>,Void> {
+public class UserCenterControllerImpl implements IUserCenterController<ISystemDetailUserVO, SystemUserDTO<Void>,Void> {
 
     private final IUserCenterService service;
 
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     @Override
-    public ResultVO<ISystemUserVO> me() {
+    public ResultVO<ISystemDetailUserVO> me() {
         return ResultVO.success(service.me());
     }
 
-    @PreAuthorize("isAuthenticated()")
     @PutMapping("/info")
     @Override
     public ResultVO<Void> updateUserInfo(@RequestBody SystemUserDTO<Void> systemUser) {
         return ResultVO.success(service.updateUserInfo(systemUser));
     }
 
-    @PreAuthorize("isAuthenticated()")
     @PutMapping("/password/change")
     @Override
     public ResultVO<Void> changePassword(@RequestBody @Validated ChangePasswordDTO changePassword) {

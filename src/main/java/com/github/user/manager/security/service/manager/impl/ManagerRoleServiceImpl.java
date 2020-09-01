@@ -1,7 +1,7 @@
 package com.github.user.manager.security.service.manager.impl;
 
 import com.github.user.manager.security.pojo.dto.SystemRoleDTO;
-import com.github.user.manager.security.pojo.vo.ISystemRoleVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailRoleVO;
 import com.github.user.manager.security.repository.IRoleRepository;
 import com.github.user.manager.security.service.manager.IManagerRoleService;
 import lombok.RequiredArgsConstructor;
@@ -31,14 +31,14 @@ public class ManagerRoleServiceImpl implements IManagerRoleService {
     private final IRoleRepository roleRepository;
 
     @Override
-    public Page<ISystemRoleVO> findAllRoles(Pageable pageable) {
-        return roleRepository.findAllBy(pageable, ISystemRoleVO.class);
+    public Page<ISystemDetailRoleVO> findAllRoles(Pageable pageable) {
+        return roleRepository.findAllBy(pageable, ISystemDetailRoleVO.class);
     }
 
     @Cacheable
     @Override
-    public ISystemRoleVO findByRoleById(Long roleId) {
-        return roleRepository.findById(roleId, ISystemRoleVO.class);
+    public ISystemDetailRoleVO findByRoleById(Long roleId) {
+        return roleRepository.findById(roleId, ISystemDetailRoleVO.class);
     }
 
     @Caching(

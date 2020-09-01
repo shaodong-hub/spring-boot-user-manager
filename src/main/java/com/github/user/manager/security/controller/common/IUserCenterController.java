@@ -2,7 +2,7 @@ package com.github.user.manager.security.controller.common;
 
 import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
-import com.github.user.manager.security.pojo.vo.ISystemUserVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 
 
-public interface IUserCenterController<V extends ISystemUserVO, T extends SystemUserDTO<E>, E> {
+public interface IUserCenterController<V extends ISystemDetailUserVO, T extends SystemUserDTO<E>, E> {
 
     /**
      * 获取当前用户信息

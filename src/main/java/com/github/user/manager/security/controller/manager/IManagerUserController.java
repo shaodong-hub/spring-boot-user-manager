@@ -2,7 +2,7 @@ package com.github.user.manager.security.controller.manager;
 
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
-import com.github.user.manager.security.pojo.vo.ISystemUserVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ import org.springframework.data.web.PageableDefault;
  */
 
 
-public interface IManagerUserController<T extends ISystemUserVO, E> {
+public interface IManagerUserController<T extends ISystemDetailUserVO, E> {
 
     /**
      * 分页查找所有的用户

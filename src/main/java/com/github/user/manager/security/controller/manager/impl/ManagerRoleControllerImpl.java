@@ -2,7 +2,7 @@ package com.github.user.manager.security.controller.manager.impl;
 
 import com.github.user.manager.security.controller.manager.IManagerRoleController;
 import com.github.user.manager.security.pojo.dto.SystemRoleDTO;
-import com.github.user.manager.security.pojo.vo.ISystemRoleVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailRoleVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import com.github.user.manager.security.service.manager.IManagerRoleService;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +35,13 @@ public class ManagerRoleControllerImpl implements IManagerRoleController<SystemR
 
     @GetMapping("roles")
     @Override
-    public ResultVO<Page<ISystemRoleVO>> findAllRoles(@PageableDefault(direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable) {
+    public ResultVO<Page<ISystemDetailRoleVO>> findAllRoles(@PageableDefault(direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable) {
         return ResultVO.success(service.findAllRoles(pageable));
     }
 
     @GetMapping("role/{id}")
     @Override
-    public ResultVO<ISystemRoleVO> findByRoleById(@PathVariable("id") Long roleId) {
+    public ResultVO<ISystemDetailRoleVO> findByRoleById(@PathVariable("id") Long roleId) {
         return ResultVO.success(service.findByRoleById(roleId));
     }
 

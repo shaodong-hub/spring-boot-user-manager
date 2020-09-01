@@ -2,7 +2,6 @@ package com.github.user.manager.security.pojo.orm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.github.user.manager.security.pojo.BaseEntity;
 import com.github.user.manager.security.pojo.converter.PasswordConverter;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;

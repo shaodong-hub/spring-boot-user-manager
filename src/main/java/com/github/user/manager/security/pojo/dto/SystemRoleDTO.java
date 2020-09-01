@@ -1,6 +1,6 @@
 package com.github.user.manager.security.pojo.dto;
 
-import com.github.user.manager.security.pojo.BaseEntity;
+import com.github.user.manager.security.pojo.orm.BaseEntity;
 
 /**
  * @author 石少东

@@ -2,7 +2,7 @@ package com.github.user.manager.security.service.common;
 
 import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
-import com.github.user.manager.security.pojo.vo.ISystemUserVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 
 /**
  * @author 石少东
@@ -13,7 +13,7 @@ import com.github.user.manager.security.pojo.vo.ISystemUserVO;
 
 public interface IUserCenterService {
 
-    ISystemUserVO me();
+    ISystemDetailUserVO me();
 
     Void changePassword(ChangePasswordDTO resetPassword);
 

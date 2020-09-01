@@ -2,7 +2,6 @@ package com.github.user.manager.security.pojo.orm;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.user.manager.security.pojo.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -21,6 +20,9 @@ import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKey;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 import java.util.Map;
 
@@ -32,7 +34,9 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_R
  * @since 1.0
  */
 
-
+@NamedEntityGraphs(value = {
+        @NamedEntityGraph(name = "SystemRoleDO.findAllBy", attributeNodes = {@NamedAttributeNode("users")}),
+})
 @Getter
 @Setter
 @Builder

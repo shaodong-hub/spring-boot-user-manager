@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.SecurityConfigurer;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.web.access.expression.ExpressionBasedFilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -36,38 +35,6 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("ApplicationCommandLineRunner");
-//        registry1();
-        registry2();
-//        registry3();
-//        UrlMapping
     }
-
-    private void registry1() {
-        Map<String, Object> map = context.getBeansOfType(Object.class);
-        log.info("Object");
-        map.forEach((k, v) -> System.out.println(k));
-        System.out.println();
-    }
-
-    private void registry2() {
-//        ExpressionUrlAuthorizationConfigurer
-        System.out.println();
-        Map<String, HttpSecurity> map = beanFactory.getBeansOfType(HttpSecurity.class);
-        log.info("HttpSecurity");
-        map.forEach((k, v) -> System.out.println(k));
-    }
-
-    private void registry3() {
-        log.info("ExpressionUrlAuthorizationConfigurer");
-        List<SecurityConfigurer<Filter, WebSecurity>> webSecurityConfigurers = new ArrayList<>();
-        Map<String, WebSecurityConfigurer> beansOfType = beanFactory
-                .getBeansOfType(WebSecurityConfigurer.class);
-        for (Map.Entry<String, WebSecurityConfigurer> entry : beansOfType.entrySet()) {
-            webSecurityConfigurers.add(entry.getValue());
-        }
-
-        log.info("ExpressionUrlAuthorizationConfigurer");
-    }
-
 
 }

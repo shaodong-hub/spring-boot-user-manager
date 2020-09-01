@@ -1,7 +1,6 @@
 package com.github.user.manager.security.core;
 
 import com.google.common.collect.Maps;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.ConfigAttribute;
@@ -12,7 +11,6 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,6 +23,7 @@ import java.util.Set;
  * @date 2020-08-28 18:00
  * @since 1.0
  */
+
 @Primary
 @Component
 public class SystemFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {

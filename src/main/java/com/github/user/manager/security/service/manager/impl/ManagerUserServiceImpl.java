@@ -2,7 +2,7 @@ package com.github.user.manager.security.service.manager.impl;
 
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
-import com.github.user.manager.security.pojo.vo.ISystemUserVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.repository.IUserRepository;
 import com.github.user.manager.security.service.manager.IManagerUserService;
 import lombok.RequiredArgsConstructor;
@@ -32,14 +32,14 @@ public class ManagerUserServiceImpl implements IManagerUserService {
     private final IUserRepository userJpaRepository;
 
     @Override
-    public Page<ISystemUserVO> findAllUsers(Pageable pageable) {
-        return userJpaRepository.findAllBy(pageable, ISystemUserVO.class);
+    public Page<ISystemDetailUserVO> findAllUsers(Pageable pageable) {
+        return userJpaRepository.findAllBy(pageable, ISystemDetailUserVO.class);
     }
 
     @Cacheable
     @Override
-    public ISystemUserVO findByUserByUsername(String username) {
-        return userJpaRepository.findByUsernameIs(username, ISystemUserVO.class);
+    public ISystemDetailUserVO findByUserByUsername(String username) {
+        return userJpaRepository.findByUsernameIs(username, ISystemDetailUserVO.class);
     }
 
     @Caching(
@@ -47,7 +47,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
             evict = {@CacheEvict(key = "'[' + #a0.username + ']'")}
     )
     @Override
-    public ISystemUserVO createUser(SystemUserDTO user) {
+    public ISystemDetailUserVO createUser(SystemUserDTO user) {
         SystemUserDO systemUser = getSystemUserFromDTO(user);
         return null;
     }

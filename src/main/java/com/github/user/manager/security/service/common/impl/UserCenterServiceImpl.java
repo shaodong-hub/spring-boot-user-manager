@@ -2,7 +2,7 @@ package com.github.user.manager.security.service.common.impl;
 
 import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
-import com.github.user.manager.security.pojo.vo.ISystemUserVO;
+import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.repository.IUserRepository;
 import com.github.user.manager.security.service.common.IUserCenterService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +25,8 @@ public class UserCenterServiceImpl implements IUserCenterService {
     private final IUserRepository repository;
 
     @Override
-    public ISystemUserVO me() {
-        return repository.findCurrentUser(ISystemUserVO.class);
+    public ISystemDetailUserVO me() {
+        return repository.findCurrentUser(ISystemDetailUserVO.class);
     }
 
     @Override

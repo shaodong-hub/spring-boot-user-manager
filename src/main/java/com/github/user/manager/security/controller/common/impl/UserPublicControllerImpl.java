@@ -39,20 +39,20 @@ public class UserPublicControllerImpl implements IUserPublicController<UserRegis
         return ResultVO.success("index");
     }
 
-    @PostMapping("/register")
     @Override
+    @PostMapping("/register")
     public ResultVO<Void> register(@RequestBody @Validated UserRegisterDTO register) {
         return ResultVO.success(service.register(register));
     }
 
-    @PostMapping("/password/retrieve/{type}")
     @Override
+    @PostMapping("/password/retrieve/{type}")
     public ResultVO<RetrieveMessageVO> retrievePassword(@PathVariable @RetrieveType String type, @RequestBody RetrievePasswordDTO retrieve) {
         return ResultVO.success(service.retrievePassword(type, retrieve));
     }
 
-    @PutMapping("/password/reset/{randomString}")
     @Override
+    @PutMapping("/password/reset/{randomString}")
     public ResultVO<Void> resetPassword(@PathVariable String randomString, @RequestBody ResetPasswordDTO resetPassword) {
         return null;
     }
