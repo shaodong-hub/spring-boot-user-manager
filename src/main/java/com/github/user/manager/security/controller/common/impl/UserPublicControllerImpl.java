@@ -2,8 +2,8 @@ package com.github.user.manager.security.controller.common.impl;
 
 import com.github.user.manager.security.constant.RetrieveType;
 import com.github.user.manager.security.controller.common.IUserPublicController;
-import com.github.user.manager.security.pojo.dto.ResetPasswordDTO;
-import com.github.user.manager.security.pojo.dto.RetrievePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordResetDTO;
+import com.github.user.manager.security.pojo.dto.PasswordRetrieveDTO;
 import com.github.user.manager.security.pojo.dto.UserRegisterDTO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import com.github.user.manager.security.pojo.vo.RetrieveMessageVO;
@@ -47,13 +47,13 @@ public class UserPublicControllerImpl implements IUserPublicController<UserRegis
 
     @Override
     @PostMapping("/password/retrieve/{type}")
-    public ResultVO<RetrieveMessageVO> retrievePassword(@PathVariable @RetrieveType String type, @RequestBody RetrievePasswordDTO retrieve) {
+    public ResultVO<RetrieveMessageVO> retrievePassword(@PathVariable @RetrieveType String type, @RequestBody PasswordRetrieveDTO retrieve) {
         return ResultVO.success(service.retrievePassword(type, retrieve));
     }
 
     @Override
     @PutMapping("/password/reset/{randomString}")
-    public ResultVO<Void> resetPassword(@PathVariable String randomString, @RequestBody ResetPasswordDTO resetPassword) {
+    public ResultVO<Void> resetPassword(@PathVariable String randomString, @RequestBody PasswordResetDTO resetPassword) {
         return null;
     }
 }

@@ -1,6 +1,6 @@
 package com.github.user.manager.security.service.common;
 
-import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordChangeDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 
@@ -15,7 +15,7 @@ public interface IUserCenterService {
 
     ISystemDetailUserVO me();
 
-    Void changePassword(ChangePasswordDTO resetPassword);
+    Void changePassword(PasswordChangeDTO resetPassword);
 
     Void updateUserInfo(SystemUserDTO systemUser);
 }

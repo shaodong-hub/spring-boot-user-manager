@@ -15,7 +15,7 @@ import javax.validation.ConstraintValidatorContext;
  */
 
 @RequiredArgsConstructor
-public class PasswordValidator implements ConstraintValidator<UserPassword, String> {
+public class PasswordOldMatchValidator implements ConstraintValidator<UserPassword, String> {
 
     private final PasswordEncoder encoder;
 

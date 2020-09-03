@@ -1,6 +1,6 @@
 package com.github.user.manager.security.service.common.impl;
 
-import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordChangeDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.repository.IUserRepository;
@@ -30,7 +30,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     }
 
     @Override
-    public Void changePassword(@NotNull ChangePasswordDTO resetPassword) {
+    public Void changePassword(@NotNull PasswordChangeDTO resetPassword) {
         repository.updateCurrentPassword(resetPassword.getPasswordNew1());
         return null;
     }

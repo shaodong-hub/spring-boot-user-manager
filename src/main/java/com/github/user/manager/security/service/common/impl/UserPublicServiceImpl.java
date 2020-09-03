@@ -1,6 +1,6 @@
 package com.github.user.manager.security.service.common.impl;
 
-import com.github.user.manager.security.pojo.dto.RetrievePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordRetrieveDTO;
 import com.github.user.manager.security.pojo.dto.UserRegisterDTO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
 import com.github.user.manager.security.pojo.vo.RetrieveMessageVO;
@@ -37,7 +37,7 @@ public class UserPublicServiceImpl implements IUserPublicService {
     }
 
     @Override
-    public RetrieveMessageVO retrievePassword(String type, RetrievePasswordDTO retrieve) {
+    public RetrieveMessageVO retrievePassword(String type, PasswordRetrieveDTO retrieve) {
         return map.get(type).retrieve(retrieve);
     }
 

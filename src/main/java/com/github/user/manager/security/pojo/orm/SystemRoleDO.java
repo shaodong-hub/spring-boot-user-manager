@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -49,6 +51,7 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_R
 @DynamicUpdate
 @EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")
 public class SystemRoleDO extends BaseEntity implements GrantedAuthority {
 
     private static final long serialVersionUID = -3157807413812174641L;
@@ -62,6 +65,7 @@ public class SystemRoleDO extends BaseEntity implements GrantedAuthority {
     @MapKey
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonBackReference
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
     private Map<Long, SystemUserDO> users;
 
     @JsonIgnore

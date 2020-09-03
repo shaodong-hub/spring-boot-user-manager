@@ -1,7 +1,6 @@
 package com.github.user.manager.security.pojo.dto;
 
 import com.github.user.manager.security.constant.ChangePassword;
-import com.github.user.manager.security.constant.UserPassword;
 import lombok.Data;
 
 /**
@@ -11,13 +10,9 @@ import lombok.Data;
  */
 
 
-
 @Data
 @ChangePassword
-public class ChangePasswordDTO {
-
-    @UserPassword
-    private String passwordOld;
+public class PasswordResetDTO {
 
     private String passwordNew1;
 

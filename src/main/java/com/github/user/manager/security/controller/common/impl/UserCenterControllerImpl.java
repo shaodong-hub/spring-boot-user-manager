@@ -1,7 +1,7 @@
 package com.github.user.manager.security.controller.common.impl;
 
 import com.github.user.manager.security.controller.common.IUserCenterController;
-import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordChangeDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
@@ -45,7 +45,7 @@ public class UserCenterControllerImpl implements IUserCenterController<ISystemDe
 
     @PutMapping("/password/change")
     @Override
-    public ResultVO<Void> changePassword(@RequestBody @Validated ChangePasswordDTO changePassword) {
+    public ResultVO<Void> changePassword(@RequestBody @Validated PasswordChangeDTO changePassword) {
         return ResultVO.success(service.changePassword(changePassword));
     }
 

@@ -1,7 +1,7 @@
 package com.github.user.manager.security.constant;
 
 
-import com.github.user.manager.security.constant.validator.PasswordValidator;
+import com.github.user.manager.security.constant.validator.PasswordOldMatchValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER, ElementType.FIELD})
-@Constraint(validatedBy = PasswordValidator.class)
+@Constraint(validatedBy = PasswordOldMatchValidator.class)
 public @interface UserPassword {
 
     String value() default "";

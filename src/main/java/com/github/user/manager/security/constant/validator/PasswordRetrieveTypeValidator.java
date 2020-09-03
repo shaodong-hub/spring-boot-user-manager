@@ -15,7 +15,7 @@ import java.util.Map;
  */
 
 @RequiredArgsConstructor
-public class RetrieveTypeValidator implements ConstraintValidator<RetrieveType, String> {
+public class PasswordRetrieveTypeValidator implements ConstraintValidator<RetrieveType, String> {
 
     private final Map<String, IRetrievePassword> map;
 

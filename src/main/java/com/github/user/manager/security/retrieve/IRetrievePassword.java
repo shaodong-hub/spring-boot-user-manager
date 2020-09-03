@@ -1,6 +1,6 @@
 package com.github.user.manager.security.retrieve;
 
-import com.github.user.manager.security.pojo.dto.RetrievePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordRetrieveDTO;
 import com.github.user.manager.security.pojo.vo.RetrieveMessageVO;
 
 /**
@@ -19,6 +19,6 @@ public interface IRetrievePassword {
      * @param password 找回密码信息
      * @return RetrieveMessageVO
      */
-    RetrieveMessageVO retrieve(RetrievePasswordDTO password);
+    RetrieveMessageVO retrieve(PasswordRetrieveDTO password);
 
 }

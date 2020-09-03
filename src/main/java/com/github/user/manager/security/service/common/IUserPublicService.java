@@ -1,6 +1,6 @@
 package com.github.user.manager.security.service.common;
 
-import com.github.user.manager.security.pojo.dto.RetrievePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordRetrieveDTO;
 import com.github.user.manager.security.pojo.dto.UserRegisterDTO;
 import com.github.user.manager.security.pojo.vo.RetrieveMessageVO;
 
@@ -15,5 +15,5 @@ public interface IUserPublicService {
 
     Void register(UserRegisterDTO register);
 
-    RetrieveMessageVO retrievePassword(String type, RetrievePasswordDTO retrieve);
+    RetrieveMessageVO retrievePassword(String type, PasswordRetrieveDTO retrieve);
 }

@@ -65,13 +65,8 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginProcessingUrl(SYSTEM_LOGIN_USERNAME).permitAll();
-        http.authorizeRequests()
-                .anyRequest().authenticated()
-        ;
+        http.authorizeRequests().anyRequest().authenticated();
         http.authorizeRequests().withObjectPostProcessor(new SystemObjectPostProcessor());
-
-//        http.antMatcher("").authorizeRequests().antMatchers("").hasRole("");
-
         http.csrf().disable();
     }
 
@@ -90,14 +85,6 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
     }
-
-//    private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMap = Maps.newHashMap();
-//
-//    @PostConstruct
-//    public void init() {
-//        requestMap.put(new AntPathRequestMatcher("/home1", HttpMethod.GET.name()), Collections.singleton((ConfigAttribute) () -> "ROLE_ROOT"));
-//        requestMap.put(new AntPathRequestMatcher("/home2", HttpMethod.GET.name()), Collections.singleton((ConfigAttribute) () -> "ROLE_USER"));
-//    }
 
     @Order
     private class SystemObjectPostProcessor implements ObjectPostProcessor<FilterSecurityInterceptor> {

@@ -1,8 +1,8 @@
 package com.github.user.manager.security.controller.common;
 
 import com.github.user.manager.security.constant.RetrieveType;
-import com.github.user.manager.security.pojo.dto.ResetPasswordDTO;
-import com.github.user.manager.security.pojo.dto.RetrievePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordResetDTO;
+import com.github.user.manager.security.pojo.dto.PasswordRetrieveDTO;
 import com.github.user.manager.security.pojo.dto.UserRegisterDTO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import com.github.user.manager.security.pojo.vo.RetrieveMessageVO;
@@ -33,9 +33,9 @@ public interface IUserPublicController<T extends UserRegisterDTO> {
      * @param retrieve 找回信息
      * @return RetrieveMessageVO
      */
-    ResultVO<RetrieveMessageVO> retrievePassword(@RetrieveType String type, @RequestBody RetrievePasswordDTO retrieve);
+    ResultVO<RetrieveMessageVO> retrievePassword(@RetrieveType String type, @RequestBody PasswordRetrieveDTO retrieve);
 
 
-    ResultVO<Void> resetPassword(String randomString, ResetPasswordDTO resetPassword);
+    ResultVO<Void> resetPassword(String randomString, PasswordResetDTO resetPassword);
 
 }

@@ -1,6 +1,6 @@
 package com.github.user.manager.security.controller.common;
 
-import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordChangeDTO;
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
@@ -37,6 +37,6 @@ public interface IUserCenterController<V extends ISystemDetailUserVO, T extends 
      * @param resetPassword 重置密码
      * @return Void
      */
-    ResultVO<Void> changePassword(@RequestBody @Validated ChangePasswordDTO resetPassword);
+    ResultVO<Void> changePassword(@RequestBody @Validated PasswordChangeDTO resetPassword);
 
 }

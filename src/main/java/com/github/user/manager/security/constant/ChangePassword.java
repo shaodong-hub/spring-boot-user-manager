@@ -1,7 +1,7 @@
 package com.github.user.manager.security.constant;
 
 
-import com.github.user.manager.security.constant.validator.ResetPasswordValidator;
+import com.github.user.manager.security.constant.validator.PasswordConfirmValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@Constraint(validatedBy = ResetPasswordValidator.class)
+@Constraint(validatedBy = PasswordConfirmValidator.class)
 public @interface ChangePassword {
 
     String value() default "";

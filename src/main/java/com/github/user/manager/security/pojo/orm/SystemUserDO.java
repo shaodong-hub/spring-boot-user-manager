@@ -2,6 +2,7 @@ package com.github.user.manager.security.pojo.orm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.github.user.manager.security.pojo.bo.PasswordBO;
 import com.github.user.manager.security.pojo.converter.PasswordConverter;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.domain.AfterDomainEventPublication;
@@ -62,6 +65,7 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.USER_ROL
 @DynamicUpdate
 @EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
 public class SystemUserDO extends BaseEntity implements UserDetails {
 
     private static final long serialVersionUID = 6949655530047745714L;
@@ -93,6 +97,7 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     @JsonManagedReference
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")
     private Map<Long, SystemRoleDO> roles;
 
     @JsonIgnore
@@ -112,6 +117,10 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     private Date lastLoginDate;
 
     @JsonIgnore
+    @Column(name = "history_password", columnDefinition = "TEXT COMMENT '历史密码'")
+    private PasswordBO historyPassword;
+
+    @JsonIgnore
     @Override
     public Collection<SystemRoleDO> getAuthorities() {
         return roles.values();
@@ -120,13 +129,21 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        if (null == accountNonExpired) {
+            return true;
+        } else {
+            return accountNonExpired.before(new Date());
+        }
     }
 
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        if (null == accountNonLocked) {
+            return true;
+        } else {
+            return accountNonLocked.before(new Date());
+        }
     }
 
     @JsonIgnore
@@ -138,17 +155,7 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isEnabled() {
-        return true;
-    }
-
-    @DomainEvents
-    public List<SystemUserDO> domainEvents() {
-        return Lists.newArrayList(this);
-    }
-
-    @AfterDomainEventPublication
-    public void callbackMethod() {
-        System.out.println("CallbackMethod");
+        return super.getEnabled();
     }
 
 }

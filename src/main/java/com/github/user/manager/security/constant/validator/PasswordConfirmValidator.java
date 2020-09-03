@@ -2,7 +2,7 @@ package com.github.user.manager.security.constant.validator;
 
 
 import com.github.user.manager.security.constant.ChangePassword;
-import com.github.user.manager.security.pojo.dto.ChangePasswordDTO;
+import com.github.user.manager.security.pojo.dto.PasswordChangeDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -16,10 +16,10 @@ import javax.validation.ConstraintValidatorContext;
  */
 
 @RequiredArgsConstructor
-public class ResetPasswordValidator implements ConstraintValidator<ChangePassword, ChangePasswordDTO> {
+public class PasswordConfirmValidator implements ConstraintValidator<ChangePassword, PasswordChangeDTO> {
 
     @Override
-    public boolean isValid(@NotNull ChangePasswordDTO value, ConstraintValidatorContext context) {
+    public boolean isValid(@NotNull PasswordChangeDTO value, ConstraintValidatorContext context) {
         return StringUtils.equals(value.getPasswordNew1(),value.getPasswordNew2());
     }
 

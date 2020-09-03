@@ -1,7 +1,7 @@
 package com.github.user.manager.security.constant;
 
 
-import com.github.user.manager.security.constant.validator.RetrieveTypeValidator;
+import com.github.user.manager.security.constant.validator.PasswordRetrieveTypeValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER, ElementType.FIELD})
-@Constraint(validatedBy = RetrieveTypeValidator.class)
+@Constraint(validatedBy = PasswordRetrieveTypeValidator.class)
 public @interface RetrieveType {
 
     String value() default "";
