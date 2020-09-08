@@ -1,7 +1,12 @@
 package com.github.user.manager.security.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -10,9 +15,52 @@ import java.util.Map;
  * @since 1.0
  */
 
-
-public interface ISystemDetailUserVO extends ISystemSimpleUserVO {
+@JsonDeserialize(as = ISystemDetailUserVO.SystemDetailUserVO.class)
+public interface ISystemDetailUserVO extends ISystemSimpleUserVO, Cloneable {
 
     @JsonManagedReference
     Map<Long, ISystemDetailRoleVO> getRoles();
+
+    @Getter
+    @Setter
+    @ToString
+    class SystemDetailUserVO implements ISystemDetailUserVO {
+
+        private static final long serialVersionUID = 8416030246671120764L;
+
+        private Long id;
+
+        private String uuid;
+
+        private String openId;
+
+        private String username;
+
+        private String mobile;
+
+        private String email;
+
+        private Date lastLoginDate;
+
+        private Boolean preset;
+
+        private Boolean enabled;
+
+        private Boolean deleted;
+
+        private Date createDate;
+
+        private Date lastModifiedDate;
+
+        private String createBy;
+
+        private String lastModifiedBy;
+
+        private String note;
+
+        private Long version;
+
+        private Map<Long, ISystemDetailRoleVO> roles;
+    }
+
 }

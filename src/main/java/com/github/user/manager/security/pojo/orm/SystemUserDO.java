@@ -32,11 +32,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKey;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_USER;
 import static com.github.user.manager.security.pojo.common.OrmTableName.USER_ROLE;
@@ -47,7 +51,11 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.USER_ROL
  * @since 1.0
  */
 
+
 @SuppressWarnings("unused")
+@NamedEntityGraphs(value = {
+        @NamedEntityGraph(name = "SystemUserDO.findByUsernameEquals", attributeNodes = {@NamedAttributeNode("roles")})
+})
 @Getter
 @Setter
 @Builder
@@ -149,7 +157,11 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        if (null == credentialsNonExpired) {
+            return true;
+        } else {
+            return credentialsNonExpired.before(new Date());
+        }
     }
 
     @JsonIgnore

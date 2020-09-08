@@ -27,6 +27,7 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 import java.util.Map;
+import java.util.Set;
 
 import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_ROLE;
 

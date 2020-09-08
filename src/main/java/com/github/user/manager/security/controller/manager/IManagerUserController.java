@@ -40,7 +40,7 @@ public interface IManagerUserController<T extends ISystemDetailUserVO, E> {
      * @param user 用户信息
      * @return ResultVO
      */
-    ResultVO<T> createUser(SystemUserDTO<E> user);
+    ResultVO<T> createUser(SystemUserDTO user);
 
     /**
      * 根据用户的 ID 删除用户

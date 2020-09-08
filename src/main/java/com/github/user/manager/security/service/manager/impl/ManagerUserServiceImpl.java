@@ -7,14 +7,19 @@ import com.github.user.manager.security.repository.IUserRepository;
 import com.github.user.manager.security.service.manager.IManagerUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author 石少东
@@ -31,15 +36,22 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 
     private final IUserRepository userJpaRepository;
 
+    @Cacheable
     @Override
-    public Page<ISystemDetailUserVO> findAllUsers(Pageable pageable) {
-        return userJpaRepository.findAllBy(pageable, ISystemDetailUserVO.class);
+    public Optional<UserDetails> loadUserByUsername(String username) {
+        return userJpaRepository.findByUsernameEquals(username);
+    }
+
+    @Cacheable(key = "#a0.pageNumber + ':' + #a0.pageSize + ':' + #a0.sort")
+    @Override
+    public PageImpl<ISystemDetailUserVO> findAllUsers(Pageable pageable) {
+        return userJpaRepository.findAllBy(pageable);
     }
 
     @Cacheable
     @Override
     public ISystemDetailUserVO findByUserByUsername(String username) {
-        return userJpaRepository.findByUsernameIs(username, ISystemDetailUserVO.class);
+        return userJpaRepository.findByUsernameIs(username);
     }
 
     @Caching(
@@ -49,6 +61,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
     @Override
     public ISystemDetailUserVO createUser(SystemUserDTO user) {
         SystemUserDO systemUser = getSystemUserFromDTO(user);
+        userJpaRepository.save(systemUser);
         return null;
     }
 
@@ -59,8 +72,9 @@ public class ManagerUserServiceImpl implements IManagerUserService {
     }
 
     private SystemUserDO getSystemUserFromDTO(SystemUserDTO user) {
-        return new SystemUserDO();
+        SystemUserDO userDO = new SystemUserDO();
+        BeanUtils.copyProperties(user, userDO);
+        return userDO;
     }
-
 
 }

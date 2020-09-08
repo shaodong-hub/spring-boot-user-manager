@@ -1,6 +1,10 @@
 package com.github.user.manager.security.pojo.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.user.manager.security.pojo.orm.SystemRoleDO;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,8 +16,8 @@ import java.util.Map;
  * @since 1.0
  */
 
-
-public interface ISystemSimpleUserVO extends IBaseEntityVO, Serializable {
+@JsonDeserialize(as = ISystemSimpleUserVO.SystemSimpleUserVO.class)
+public interface ISystemSimpleUserVO extends IBaseEntityVO, Cloneable, Serializable {
 
     String getUuid();
 
@@ -23,15 +27,48 @@ public interface ISystemSimpleUserVO extends IBaseEntityVO, Serializable {
 
     String getMobile();
 
-    String getPassword();
-
     String getEmail();
 
-    Date getAccountNonExpired();
-
-    Date getAccountNonLocked();
-
-    Date getCredentialsNonExpired();
-
     Date getLastLoginDate();
+
+    @Getter
+    @Setter
+    @ToString
+    class SystemSimpleUserVO implements ISystemSimpleUserVO {
+
+        private static final long serialVersionUID = 6354964609853409039L;
+
+        private Long id;
+
+        private String uuid;
+
+        private String openId;
+
+        private String username;
+
+        private String mobile;
+
+        private String email;
+
+        private Date lastLoginDate;
+
+        private Boolean preset;
+
+        private Boolean enabled;
+
+        private Boolean deleted;
+
+        private Date createDate;
+
+        private Date lastModifiedDate;
+
+        private String createBy;
+
+        private String lastModifiedBy;
+
+        private String note;
+
+        private Long version;
+    }
+
 }

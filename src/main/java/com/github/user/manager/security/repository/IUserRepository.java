@@ -2,8 +2,12 @@ package com.github.user.manager.security.repository;
 
 import com.github.user.manager.security.pojo.bo.PasswordBO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,15 +22,17 @@ import java.util.Optional;
  * @since 1.0
  */
 
+
 public interface IUserRepository extends JpaRepository<SystemUserDO, Long> {
 
     /**
-     * 根据用户名查找用户
+     * 查找所有的用户
      *
-     * @param username 用户名
-     * @return SystemUserDO
+     * @param pageable 分页
+     * @param <V>      泛型
+     * @return Page
      */
-    Optional<SystemUserDO> findByUsernameEquals(String username);
+    <V> PageImpl<V> findAllBy(Pageable pageable);
 
     /**
      * 根据用户的ID 更新密码
@@ -75,50 +81,31 @@ public interface IUserRepository extends JpaRepository<SystemUserDO, Long> {
     /**
      * 获取当前用户的信息
      *
-     * @param clz 泛型类型
      * @param <V> 泛型
      * @return v
      */
     @Query("SELECT user FROM SystemUserDO AS user WHERE user.username = :#{principal.username}")
     <V> V findCurrentUser(Class<V> clz);
 
-    /**
-     * 查找所有的用户
-     *
-     * @param pageable 分页
-     * @param clz      泛型
-     * @param <V>      泛型
-     * @return Page
-     */
-    <V> Page<V> findAllBy(Pageable pageable, Class<V> clz);
 
     /**
      * 根据用户名查找用户
      *
      * @param username 用户名
-     * @param clz      泛型
      * @param <V>      泛型
      * @return Optional
      */
-    <V> Optional<V> findByUsernameEquals(String username, Class<V> clz);
+    @EntityGraph(value = "SystemUserDO.findByUsernameEquals")
+    <V> Optional<V> findByUsernameEquals(String username);
 
     /**
      * 根据用户名查找用户信息
      *
      * @param username 用户名
-     * @param clz      泛型类型
      * @param <V>      泛型
      * @return v
      */
-    <V> V findByUsernameIs(String username, Class<V> clz);
-
-    /**
-     * 根据当前用户的 ID 查找用户
-     *
-     * @param id 用户的 ID
-     * @return 用户信息
-     */
-    SystemUserDO findById(long id);
+    <V> V findByUsernameIs(String username);
 
     /**
      * 更新用户最后登录时间id

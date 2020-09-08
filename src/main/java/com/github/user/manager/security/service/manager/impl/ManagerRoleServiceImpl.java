@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -30,23 +31,20 @@ public class ManagerRoleServiceImpl implements IManagerRoleService {
 
     private final IRoleRepository roleRepository;
 
+    @Cacheable(key = "#a0.pageNumber + ':' + #a0.pageSize + ':' + #a0.sort")
     @Override
-    public Page<ISystemDetailRoleVO> findAllRoles(Pageable pageable) {
-        return roleRepository.findAllBy(pageable, ISystemDetailRoleVO.class);
+    public PageImpl<ISystemDetailRoleVO> findAllRoles(Pageable pageable) {
+        return roleRepository.findAllBy(pageable);
     }
 
     @Cacheable
     @Override
     public ISystemDetailRoleVO findByRoleById(Long roleId) {
-        return roleRepository.findById(roleId, ISystemDetailRoleVO.class);
+        return roleRepository.findByIdEquals(roleId);
     }
 
-    @Caching(
-            put = {@CachePut(key = "#result.username")},
-            evict = {@CacheEvict(key = "'[' + #a0.username + ']'")}
-    )
     @Override
-    public void createRole(SystemRoleDTO user) {
+    public void createRole(SystemRoleDTO role) {
 
     }
 

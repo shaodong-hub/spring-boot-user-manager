@@ -3,6 +3,7 @@ package com.github.user.manager.security.service.manager;
 import com.github.user.manager.security.pojo.dto.SystemRoleDTO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailRoleVO;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -14,11 +15,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface IManagerRoleService {
 
-    Page<ISystemDetailRoleVO> findAllRoles(Pageable pageable);
+    PageImpl<ISystemDetailRoleVO> findAllRoles(Pageable pageable);
 
     ISystemDetailRoleVO findByRoleById(Long roleId);
 
-    void createRole(SystemRoleDTO user);
+    void createRole(SystemRoleDTO role);
 
     void deleteRoleById(Long roleId);
 }

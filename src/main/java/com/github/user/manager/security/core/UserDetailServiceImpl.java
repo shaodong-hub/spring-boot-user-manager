@@ -1,7 +1,6 @@
 package com.github.user.manager.security.core;
 
-import com.github.user.manager.security.pojo.orm.SystemUserDO;
-import com.github.user.manager.security.repository.IUserRepository;
+import com.github.user.manager.security.service.manager.IManagerUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,11 +20,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    private final IUserRepository repository;
+    private final IManagerUserService service;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<SystemUserDO> optional = repository.findByUsernameEquals(username);
+        Optional<UserDetails> optional = service.loadUserByUsername(username);
         if (!optional.isPresent()) {
             throw new UsernameNotFoundException(username);
         }

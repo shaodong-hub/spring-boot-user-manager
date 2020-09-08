@@ -4,6 +4,7 @@ import com.github.user.manager.security.pojo.dto.SystemRoleDTO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailRoleVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -23,7 +24,7 @@ public interface IManagerRoleController<T extends SystemRoleDTO> {
      * @param pageable 分页信息
      * @return Page
      */
-    ResultVO<Page<ISystemDetailRoleVO>> findAllRoles(@PageableDefault(direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable);
+    ResultVO<PageImpl<ISystemDetailRoleVO>> findAllRoles(@PageableDefault(direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable);
 
     /**
      * 根据ID查找角色

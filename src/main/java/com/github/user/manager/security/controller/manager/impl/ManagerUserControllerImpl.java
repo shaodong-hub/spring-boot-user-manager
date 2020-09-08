@@ -49,7 +49,7 @@ public class ManagerUserControllerImpl implements IManagerUserController<ISystem
 
     @PostMapping("/user")
     @Override
-    public ResultVO<ISystemDetailUserVO> createUser(@RequestBody SystemUserDTO<Void> user) {
+    public ResultVO<ISystemDetailUserVO> createUser(@RequestBody SystemUserDTO user) {
         return null;
     }
 

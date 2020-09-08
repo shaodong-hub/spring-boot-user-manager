@@ -8,6 +8,8 @@ import com.github.user.manager.security.service.common.IUserCenterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 @Service
+@CacheConfig(cacheNames = "user", keyGenerator = "RedisGenerator")
 public class UserCenterServiceImpl implements IUserCenterService {
 
     private final IUserRepository repository;

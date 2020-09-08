@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user/center")
 @PreAuthorize("isFullyAuthenticated()")
 @RequiredArgsConstructor
-public class UserCenterControllerImpl implements IUserCenterController<ISystemDetailUserVO, SystemUserDTO<Void>,Void> {
+public class UserCenterControllerImpl implements IUserCenterController<ISystemDetailUserVO, SystemUserDTO,Void> {
 
     private final IUserCenterService service;
 
@@ -39,7 +39,7 @@ public class UserCenterControllerImpl implements IUserCenterController<ISystemDe
 
     @PutMapping("/info")
     @Override
-    public ResultVO<Void> updateUserInfo(@RequestBody SystemUserDTO<Void> systemUser) {
+    public ResultVO<Void> updateUserInfo(@RequestBody SystemUserDTO systemUser) {
         return ResultVO.success(service.updateUserInfo(systemUser));
     }
 

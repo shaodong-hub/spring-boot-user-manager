@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 
 
-public interface IUserCenterController<V extends ISystemDetailUserVO, T extends SystemUserDTO<E>, E> {
+public interface IUserCenterController<V extends ISystemDetailUserVO, T extends SystemUserDTO, E> {
 
     /**
      * 获取当前用户信息

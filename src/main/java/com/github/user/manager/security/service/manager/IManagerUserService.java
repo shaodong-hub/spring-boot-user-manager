@@ -4,7 +4,11 @@ import com.github.user.manager.security.pojo.dto.SystemUserDTO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Optional;
 
 /**
  * @author 石少东
@@ -16,12 +20,20 @@ import org.springframework.data.domain.Pageable;
 public interface IManagerUserService {
 
     /**
+     * 根据用户名查找用户
+     *
+     * @param username 用户名
+     * @return Optional
+     */
+    Optional<UserDetails> loadUserByUsername(String username);
+
+    /**
      * 查找所有的用户
      *
      * @param pageable 分页信息
      * @return Page
      */
-    Page<ISystemDetailUserVO> findAllUsers(Pageable pageable);
+    PageImpl<ISystemDetailUserVO> findAllUsers(Pageable pageable);
 
     /**
      * 根据用户名查找用户

@@ -3,6 +3,7 @@ package com.github.user.manager.security.pojo.converter;
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.AttributeConverter;

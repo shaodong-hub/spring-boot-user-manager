@@ -1,8 +1,9 @@
 package com.github.user.manager.security.pojo.dto;
 
-import com.github.user.manager.security.pojo.orm.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * @author 石少东
@@ -13,11 +14,18 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SystemUserDTO<E> extends BaseEntity {
+public class SystemUserDTO implements Serializable {
 
     private static final long serialVersionUID = 8244210886033431393L;
 
     private String username;
 
-    private E optional;
+    private String mobile;
+
+    private String password;
+
+    private String email;
+
+    private String note;
+
 }

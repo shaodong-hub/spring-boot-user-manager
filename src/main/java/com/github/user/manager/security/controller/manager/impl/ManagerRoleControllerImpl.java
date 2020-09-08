@@ -7,6 +7,7 @@ import com.github.user.manager.security.pojo.vo.ResultVO;
 import com.github.user.manager.security.service.manager.IManagerRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -35,7 +36,7 @@ public class ManagerRoleControllerImpl implements IManagerRoleController<SystemR
 
     @GetMapping("roles")
     @Override
-    public ResultVO<Page<ISystemDetailRoleVO>> findAllRoles(@PageableDefault(direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable) {
+    public ResultVO<PageImpl<ISystemDetailRoleVO>> findAllRoles(@PageableDefault(direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable) {
         return ResultVO.success(service.findAllRoles(pageable));
     }
 
