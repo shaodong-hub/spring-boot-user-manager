@@ -2,6 +2,8 @@ package com.github.user.manager.security.pojo.orm;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -13,13 +15,20 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKey;
 import javax.persistence.NamedAttributeNode;
@@ -29,6 +38,7 @@ import javax.persistence.Table;
 import java.util.Map;
 import java.util.Set;
 
+import static com.github.user.manager.security.pojo.common.OrmTableName.ROLE_RESOURCE;
 import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_ROLE;
 
 /**
@@ -46,13 +56,14 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_R
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = SYSTEM_ROLE)
 @DynamicInsert
 @DynamicUpdate
 @EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")
+@Entity
+@Where(clause = "deleted = false or deleted is null")
+@Table(name = SYSTEM_ROLE)
 public class SystemRoleDO extends BaseEntity implements GrantedAuthority {
 
     private static final long serialVersionUID = -3157807413812174641L;
@@ -68,6 +79,15 @@ public class SystemRoleDO extends BaseEntity implements GrantedAuthority {
     @JsonBackReference
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
     private Map<Long, SystemUserDO> users;
+
+//    @ManyToMany(targetEntity = SystemResourceDO.class, cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = ROLE_RESOURCE,
+//            joinColumns = {@JoinColumn(name = "mid_role_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "mid_resource_id", referencedColumnName = "id")}
+//    )
+//    @JsonManagedReference
+//    private Set<SystemResourceDO> systemResources;
 
     @JsonIgnore
     @Override

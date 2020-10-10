@@ -15,4 +15,8 @@ public interface OrmTableName {
 
     String USER_ROLE = "system_user_role";
 
+    String SYSTEM_RESOURCE = "system_resource";
+
+    String ROLE_RESOURCE  = "system_role_resource";
+
 }

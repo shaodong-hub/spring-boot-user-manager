@@ -35,6 +35,8 @@ import java.util.Date;
 @EqualsAndHashCode(of = "id", callSuper = false)
 public abstract class BaseEntity implements Serializable {
 
+    protected static final String ID = "id";
+
     private static final long serialVersionUID = 6967867647425236119L;
 
     @Id

@@ -16,6 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Where;
 import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.data.domain.DomainEvents;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -27,6 +28,9 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -62,18 +66,19 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.USER_ROL
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
+@EqualsAndHashCode(callSuper = true)
+@EntityListeners(AuditingEntityListener.class)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
 @Entity
+@Where(clause = "deleted = false or deleted is null")
 @Table(name = SYSTEM_USER, indexes = {
         @Index(columnList = "uuid", name = "IDX_UUID", unique = true),
         @Index(columnList = "open_id", name = "IDX_OPENID", unique = true),
         @Index(columnList = "username", name = "IDX_USERNAME", unique = true),
         @Index(columnList = "mobile", name = "IDX_MOBILE", unique = true),
 })
-@DynamicInsert
-@DynamicUpdate
-@EqualsAndHashCode(callSuper = true)
-@EntityListeners(AuditingEntityListener.class)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
 public class SystemUserDO extends BaseEntity implements UserDetails {
 
     private static final long serialVersionUID = 6949655530047745714L;
