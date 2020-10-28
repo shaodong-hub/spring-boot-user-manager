@@ -2,17 +2,14 @@ package com.github.user.manager.security.repository;
 
 import com.github.user.manager.security.pojo.bo.PasswordBO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -82,11 +79,12 @@ public interface IUserRepository extends JpaRepository<SystemUserDO, Long>, JpaS
     /**
      * 获取当前用户的信息
      *
+     * @param clz 转成需要的类型
      * @param <V> 泛型
      * @return v
      */
     @Query("SELECT user FROM SystemUserDO AS user WHERE user.username = :#{principal.username}")
-    <V> V findCurrentUser(Class<V> clz);
+    <V> V currentUser(Class<V> clz);
 
 
     /**

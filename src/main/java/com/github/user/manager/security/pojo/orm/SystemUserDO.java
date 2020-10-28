@@ -2,6 +2,7 @@ package com.github.user.manager.security.pojo.orm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.github.user.manager.security.pojo.base.BaseEntity;
 import com.github.user.manager.security.pojo.bo.PasswordBO;
 import com.github.user.manager.security.pojo.converter.PasswordConverter;
 import lombok.AllArgsConstructor;
@@ -11,8 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
@@ -25,6 +24,9 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -60,9 +62,9 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.USER_ROL
 @AllArgsConstructor
 @DynamicInsert
 @DynamicUpdate
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = "id", callSuper = false)
 @EntityListeners(AuditingEntityListener.class)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
 @Entity
 @Where(clause = "deleted = false or deleted is null")
 @Table(name = SYSTEM_USER, indexes = {
@@ -74,6 +76,11 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.USER_ROL
 public class SystemUserDO extends BaseEntity implements UserDetails {
 
     private static final long serialVersionUID = 6949655530047745714L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = ID)
+    private Long id;
 
     private String uuid;
 
@@ -102,7 +109,7 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = ID)}
     )
     @JsonManagedReference
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")
     private Map<Long, SystemRoleDO> roles;
 
     @JsonIgnore

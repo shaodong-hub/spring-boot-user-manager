@@ -12,11 +12,13 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author 石少东
@@ -36,26 +38,27 @@ public class SystemFilterInvocationSecurityMetadataSource implements FilterInvoc
         requestMap.put(new AntPathRequestMatcher("/home2", HttpMethod.GET.name()), Collections.singleton((ConfigAttribute) () -> "ROLE_USER"));
     }
 
-
+    /**
+     * 需要从这个对象中取出要访问的URL，然后再从数据库中取出这个访问这个 URL 需要哪些角色。
+     *
+     * @param object 实际是这个类型 {@link FilterInvocation}
+     * @return Collection
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         final HttpServletRequest request = ((FilterInvocation) object).getRequest();
-        for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : requestMap.entrySet()) {
-            if (entry.getKey().matches(request)) {
-                return entry.getValue();
-            }
-        }
-        return Collections.singleton((ConfigAttribute) () -> "ROLE_ROOT");
+        Collection<ConfigAttribute> collection = new ArrayList<>(Collections.singleton((ConfigAttribute) () -> "ROLE_ROOT"));
+        requestMap.entrySet().stream().filter(one -> one.getKey().matches(request)).findFirst().ifPresent(one -> collection.addAll(one.getValue()));
+        return collection;
     }
 
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
         Set<ConfigAttribute> allAttributes = new HashSet<>();
-
         for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : requestMap.entrySet()) {
             allAttributes.addAll(entry.getValue());
         }
-
         return allAttributes;
     }
 

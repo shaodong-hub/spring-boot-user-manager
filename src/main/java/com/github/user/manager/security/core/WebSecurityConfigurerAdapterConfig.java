@@ -86,17 +86,6 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
         super.configure(web);
     }
 
-    @Order
-    private class SystemObjectPostProcessor implements ObjectPostProcessor<FilterSecurityInterceptor> {
-
-        @Override
-        public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-            fsi.setSecurityMetadataSource(metadataSource);
-            fsi.setAccessDecisionManager(accessDecisionManager);
-            return fsi;
-        }
-    }
-
     private AccessDecisionManager accessDecisionManager;
 
     private FilterInvocationSecurityMetadataSource metadataSource;
@@ -110,4 +99,16 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
     public void setMetadataSource(FilterInvocationSecurityMetadataSource metadataSource) {
         this.metadataSource = metadataSource;
     }
+
+    @Order
+    private class SystemObjectPostProcessor implements ObjectPostProcessor<FilterSecurityInterceptor> {
+
+        @Override
+        public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
+            fsi.setSecurityMetadataSource(metadataSource);
+            fsi.setAccessDecisionManager(accessDecisionManager);
+            return fsi;
+        }
+    }
+
 }

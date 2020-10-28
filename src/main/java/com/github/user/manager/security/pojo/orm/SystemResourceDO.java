@@ -1,8 +1,8 @@
 //package com.github.user.manager.security.pojo.orm;
 //
 //import com.fasterxml.jackson.annotation.JsonBackReference;
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.github.user.manager.security.pojo.base.BaseEntity;
 //import lombok.AllArgsConstructor;
 //import lombok.Builder;
 //import lombok.EqualsAndHashCode;
@@ -10,8 +10,7 @@
 //import lombok.NoArgsConstructor;
 //import lombok.Setter;
 //import lombok.ToString;
-//import org.hibernate.annotations.Cache;
-//import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.ColumnDefault;
 //import org.hibernate.annotations.DynamicInsert;
 //import org.hibernate.annotations.DynamicUpdate;
 //import org.hibernate.annotations.Where;
@@ -22,13 +21,14 @@
 //import javax.persistence.Column;
 //import javax.persistence.Entity;
 //import javax.persistence.EntityListeners;
+//import javax.persistence.EnumType;
+//import javax.persistence.Enumerated;
 //import javax.persistence.FetchType;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 //import javax.persistence.Id;
 //import javax.persistence.Index;
 //import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToMany;
 //import javax.persistence.ManyToOne;
 //import javax.persistence.OneToMany;
 //import javax.persistence.OrderBy;
@@ -52,9 +52,9 @@
 //@AllArgsConstructor
 //@DynamicInsert
 //@DynamicUpdate
-//@EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(of = "id", callSuper = false)
 //@EntityListeners(AuditingEntityListener.class)
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemResourceDO")
+////@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemResourceDO")
 //@Entity
 //@Where(clause = "deleted = false or deleted is null")
 //@Table(name = SYSTEM_RESOURCE, indexes = {
@@ -66,25 +66,34 @@
 //
 //    private static final long serialVersionUID = 6566868621910913526L;
 //
-//    @Column(name = "resource_name", nullable = false, length = 100, columnDefinition = "VARCHAR(100) COMMENT '资源名称'")
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = ID)
+//    private Long id;
+//
+//    @Column(name = "resource_name", nullable = false, columnDefinition = "VARCHAR(100) COMMENT '资源名称'")
 //    private String resourceName;
 //
-//    @Column(name = "resource_code", nullable = false, length = 100, columnDefinition = "VARCHAR(100) COMMENT '资源唯一名称'")
+//    @Column(name = "resource_code", nullable = false, columnDefinition = "VARCHAR(100) COMMENT '资源唯一名称'")
 //    private String resourceCode;
 //
-//    @Column(length = 100, columnDefinition = "COMMENT '资源URL'")
+//    @Column(columnDefinition = "VARCHAR(2048) COMMENT '资源URL'")
 //    private String url;
 //
-//    @Column(length = 100, columnDefinition = "COMMENT '资源请求方式'")
+//    @Column(columnDefinition = "VARCHAR(10) COMMENT '资源请求方式'")
+//    @Enumerated(EnumType.STRING)
 //    private HttpMethod method;
 //
-//    @Column(nullable = false, columnDefinition = "INT(1) DEFAULT 0 COMMENT '菜单优先级'")
+//    @ColumnDefault("0")
+//    @Column(nullable = false, columnDefinition = "INT(1) COMMENT '菜单优先级'")
 //    private Integer priority;
 //
-//    @Column(columnDefinition = "INT(1) DEFAULT 0 COMMENT '组织架构编码'")
+//    @ColumnDefault("0")
+//    @Column(columnDefinition = "INT(1) COMMENT '组织架构编码'")
 //    private Boolean open;
 //
-//    @Column(columnDefinition = "INT(1) DEFAULT 0 COMMENT '组织架构层级关系'")
+//    @ColumnDefault("0")
+//    @Column(columnDefinition = "INT(1) COMMENT '组织架构层级关系'")
 //    private Integer level;
 //
 //    @Column(columnDefinition = "VARCHAR(100) COMMENT 'ICON 的路径'")

@@ -17,11 +17,22 @@ import java.util.List;
 @Component
 public class SystemAccessDecisionManager {
 
+    /**
+     * 只要是有一个赞成就授权
+     *
+     * @param decisionVoters List
+     * @return AffirmativeBased
+     */
     @Bean
     public AffirmativeBased affirmativeBased(List<AccessDecisionVoter<?>> decisionVoters) {
         return new AffirmativeBased(decisionVoters);
     }
 
+    /**
+     * 使用提供的角色投票器，
+     *
+     * @return 角色投票器
+     */
     @Bean
     public AccessDecisionVoter<Object> accessDecisionVoter() {
         return new RoleVoter();

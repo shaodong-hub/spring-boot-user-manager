@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@PreAuthorize("hasRole('ROLE_ROOT')")
+@PreAuthorize("hasAnyRole('ROLE_ROOT')")
 @RequestMapping("/manager/role")
 @RequiredArgsConstructor
 public class ManagerRoleControllerImpl implements IManagerRoleController<SystemRoleDTO> {

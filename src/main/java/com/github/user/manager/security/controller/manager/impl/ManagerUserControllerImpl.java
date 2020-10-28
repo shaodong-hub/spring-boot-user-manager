@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@PreAuthorize("hasRole('ROLE_ROOT')")
+@PreAuthorize("hasAnyRole('ROLE_ROOT')")
 @RequestMapping("/manager/user")
 @RequiredArgsConstructor
 public class ManagerUserControllerImpl implements IManagerUserController<ISystemDetailUserVO, Void> {

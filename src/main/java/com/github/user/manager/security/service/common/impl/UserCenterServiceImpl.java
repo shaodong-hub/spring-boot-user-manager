@@ -28,7 +28,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
 
     @Override
     public ISystemDetailUserVO me() {
-        return repository.findCurrentUser(ISystemDetailUserVO.class);
+        return repository.currentUser(ISystemDetailUserVO.class);
     }
 
     @Override

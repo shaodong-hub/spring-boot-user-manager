@@ -2,6 +2,7 @@ package com.github.user.manager.security.pojo.orm;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.user.manager.security.pojo.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,8 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
@@ -21,6 +20,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKey;
 import javax.persistence.NamedAttributeNode;
@@ -48,15 +50,20 @@ import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_R
 @AllArgsConstructor
 @DynamicInsert
 @DynamicUpdate
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = "id", callSuper = false)
 @EntityListeners(AuditingEntityListener.class)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")
 @Entity
 @Where(clause = "deleted = false or deleted is null")
 @Table(name = SYSTEM_ROLE)
 public class SystemRoleDO extends BaseEntity implements GrantedAuthority {
 
     private static final long serialVersionUID = -3157807413812174641L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = ID)
+    private Long id;
 
     @Column(name = "role_name", columnDefinition = "VARCHAR(20) COMMENT '角色名称'")
     private String roleName;
@@ -67,7 +74,7 @@ public class SystemRoleDO extends BaseEntity implements GrantedAuthority {
     @MapKey
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonBackReference
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemUserDO")
     private Map<Long, SystemUserDO> users;
 
 //    @ManyToMany(targetEntity = SystemResourceDO.class, cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

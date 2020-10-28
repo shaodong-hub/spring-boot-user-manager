@@ -1,6 +1,6 @@
 package com.github.user.manager.security.pojo.dto;
 
-import com.github.user.manager.security.pojo.orm.BaseEntity;
+import com.github.user.manager.security.pojo.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
