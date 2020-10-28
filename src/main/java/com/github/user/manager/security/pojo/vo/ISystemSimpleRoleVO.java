@@ -1,9 +1,6 @@
 package com.github.user.manager.security.pojo.vo;
 
-import com.github.user.manager.security.pojo.orm.SystemUserDO;
-
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * @author 石少东

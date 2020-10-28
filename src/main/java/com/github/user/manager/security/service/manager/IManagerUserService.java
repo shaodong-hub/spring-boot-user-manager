@@ -1,6 +1,7 @@
 package com.github.user.manager.security.service.manager;
 
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
+import com.github.user.manager.security.pojo.dto.UserQueryConditionsDTO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import org.springframework.data.domain.Page;
@@ -33,7 +34,7 @@ public interface IManagerUserService {
      * @param pageable 分页信息
      * @return Page
      */
-    PageImpl<ISystemDetailUserVO> findAllUsers(Pageable pageable);
+    Page<SystemUserDO> findAllUsers(UserQueryConditionsDTO query, Pageable pageable);
 
     /**
      * 根据用户名查找用户
@@ -50,6 +51,8 @@ public interface IManagerUserService {
      * @return ISystemUserVO
      */
     ISystemDetailUserVO createUser(SystemUserDTO user);
+
+    ISystemDetailUserVO updateUser(SystemUserDTO user);
 
     /**
      * 删除用户

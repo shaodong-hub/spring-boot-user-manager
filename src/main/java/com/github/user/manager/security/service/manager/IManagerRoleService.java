@@ -2,7 +2,6 @@ package com.github.user.manager.security.service.manager;
 
 import com.github.user.manager.security.pojo.dto.SystemRoleDTO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailRoleVO;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 

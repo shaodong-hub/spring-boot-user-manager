@@ -1,7 +1,6 @@
 package com.github.user.manager.security.repository;
 
 import com.github.user.manager.security.pojo.orm.SystemRoleDO;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;

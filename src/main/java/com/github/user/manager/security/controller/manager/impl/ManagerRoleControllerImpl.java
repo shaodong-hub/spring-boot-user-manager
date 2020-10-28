@@ -6,7 +6,6 @@ import com.github.user.manager.security.pojo.vo.ISystemDetailRoleVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import com.github.user.manager.security.service.manager.IManagerRoleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

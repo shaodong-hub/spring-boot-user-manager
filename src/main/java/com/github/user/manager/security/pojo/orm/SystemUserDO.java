@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.github.user.manager.security.pojo.bo.PasswordBO;
 import com.github.user.manager.security.pojo.converter.PasswordConverter;
-import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,8 +16,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
-import org.springframework.data.domain.AfterDomainEventPublication;
-import org.springframework.data.domain.DomainEvents;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,9 +25,6 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -42,9 +36,7 @@ import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static com.github.user.manager.security.pojo.common.OrmTableName.SYSTEM_USER;
 import static com.github.user.manager.security.pojo.common.OrmTableName.USER_ROLE;
@@ -106,8 +98,8 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     @ManyToMany(targetEntity = SystemRoleDO.class, cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(
             name = USER_ROLE,
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = ID)},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = ID)}
     )
     @JsonManagedReference
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "SystemRoleDO")

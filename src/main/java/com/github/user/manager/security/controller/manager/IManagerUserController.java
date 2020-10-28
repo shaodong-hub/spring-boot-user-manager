@@ -1,13 +1,12 @@
 package com.github.user.manager.security.controller.manager;
 
 import com.github.user.manager.security.pojo.dto.SystemUserDTO;
+import com.github.user.manager.security.pojo.dto.UserQueryConditionsDTO;
 import com.github.user.manager.security.pojo.orm.SystemUserDO;
 import com.github.user.manager.security.pojo.vo.ISystemDetailUserVO;
 import com.github.user.manager.security.pojo.vo.ResultVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 
 /**
  * @author 石少东
@@ -24,7 +23,7 @@ public interface IManagerUserController<T extends ISystemDetailUserVO, E> {
      * @param pageable 分页信息
      * @return Page
      */
-    ResultVO<Page<T>> findAllUsers(@PageableDefault(direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable);
+    ResultVO<Page<SystemUserDO>> findAllUsers(UserQueryConditionsDTO query, Pageable pageable);
 
     /**
      * 根据用户名查找用户
@@ -41,6 +40,15 @@ public interface IManagerUserController<T extends ISystemDetailUserVO, E> {
      * @return ResultVO
      */
     ResultVO<T> createUser(SystemUserDTO user);
+
+    /**
+     * 创建用户
+     *
+     * @param user 用户信息
+     * @return ResultVO
+     */
+    ResultVO<T> updateUser(SystemUserDTO user);
+
 
     /**
      * 根据用户的 ID 删除用户

@@ -4,17 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.config.annotation.SecurityConfigurer;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.servlet.Filter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author 石少东
