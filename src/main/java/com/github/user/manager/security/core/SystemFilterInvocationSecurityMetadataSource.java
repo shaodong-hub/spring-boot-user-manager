@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 
-@Primary
-@Component
+//@Primary
+//@Component
 public class SystemFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMap = Maps.newHashMap();

@@ -66,7 +66,7 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginProcessingUrl(SYSTEM_LOGIN_USERNAME).permitAll();
         http.authorizeRequests().anyRequest().authenticated();
-        http.authorizeRequests().withObjectPostProcessor(new SystemObjectPostProcessor());
+//        http.authorizeRequests().withObjectPostProcessor(new SystemObjectPostProcessor());
         http.csrf().disable();
     }
 

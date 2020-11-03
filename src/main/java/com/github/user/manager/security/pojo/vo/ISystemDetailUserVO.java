@@ -18,6 +18,11 @@ import java.util.Map;
 @JsonDeserialize(as = ISystemDetailUserVO.SystemDetailUserVO.class)
 public interface ISystemDetailUserVO extends ISystemSimpleUserVO, Cloneable {
 
+    /**
+     * 用户的角色
+     *
+     * @return Map
+     */
     @JsonManagedReference
     Map<Long, ISystemDetailRoleVO> getRoles();
 

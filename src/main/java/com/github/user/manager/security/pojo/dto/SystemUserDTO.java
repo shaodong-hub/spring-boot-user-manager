@@ -3,6 +3,7 @@ package com.github.user.manager.security.pojo.dto;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.user.manager.security.pojo.view.ICreateView;
 import com.github.user.manager.security.pojo.view.IUpdateView;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ import java.io.Serializable;
 
 
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 public class SystemUserDTO implements Serializable {
 

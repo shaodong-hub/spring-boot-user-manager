@@ -56,13 +56,13 @@ public class ManagerUserControllerImpl implements IManagerUserController<ISystem
     @PostMapping("/user")
     @Override
     public ResultVO<ISystemDetailUserVO> createUser(@JsonView(ICreateView.class) @RequestBody SystemUserDTO user) {
-        return null;
+        return ResultVO.success(service.createUser(user));
     }
 
     @PutMapping("/user")
     @Override
     public ResultVO<ISystemDetailUserVO> updateUser(@JsonView(IUpdateView.class) @RequestBody SystemUserDTO user) {
-        return null;
+        return ResultVO.success(service.updateUser(user));
     }
 
     @DeleteMapping("/user/{id}")

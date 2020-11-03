@@ -61,7 +61,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
     }
 
     @Caching(
-            put = {@CachePut(key = "#result.username")},
+            put = {@CachePut(key = "#result.username"), @CachePut(key = "#result.mobile")},
             evict = {@CacheEvict(key = "'[' + #a0.username + ']'")}
     )
     @Override
@@ -71,8 +71,17 @@ public class ManagerUserServiceImpl implements IManagerUserService {
         return null;
     }
 
+    @Caching(
+            put = {@CachePut(key = "#result.username"), @CachePut(key = "#result.mobile")},
+            evict = {@CacheEvict(key = "'[' + #a0.username + ']'")}
+    )
     @Override
     public ISystemDetailUserVO updateUser(SystemUserDTO user) {
+        Optional<SystemUserDO> optional = userJpaRepository.findById(user.getId());
+        optional.ifPresent(one -> {
+            BeanUtils.copyProperties(user, one);
+            userJpaRepository.save(one);
+        });
         return null;
     }
 
