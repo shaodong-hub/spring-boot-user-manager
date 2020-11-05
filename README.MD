@@ -1,5 +1,8 @@
 # Spring Security 实战
 
+
+READ MORE[HERE](src/main/doc/SEIMPLE.MD)
+
 ## 简介
 
 ## 从一个小例子开始
@@ -80,6 +83,10 @@ HttpSecurity 用于构建一个安全过滤器链 SecurityFilterChain，Security
 ## 一个稍微复杂的例子
 
 
+## 自定义认证成功处理器
+
+## 自定义认证失败处理器
+
 ## Spring Security 核心注解
 @PreAuthorize()
 @PostAuthorize()
@@ -97,6 +104,8 @@ HttpSecurity 用于构建一个安全过滤器链 SecurityFilterChain，Security
 ### UsernamePasswordAuthenticationFilter 解析
 
 ## Spring Security 自定义认证逻辑-图形验证码实现
+
+## Spring Security 自定义认证逻辑-短信证码实现
 
 ## Spring Security 授权原理
 
